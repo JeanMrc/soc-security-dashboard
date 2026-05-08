@@ -19,7 +19,7 @@ def parse_log():
     if not os.path.exists(LOG_FILE):
         return events
         
-    with open(LOG_FILE, "r") as f:
+    with open(LOG_FILE, "r", encoding="utf-8") as f:
         for line in f.readlines():
             line = line.strip()
             if not line:
@@ -39,7 +39,7 @@ def parse_log():
             events.append({
                 "timestamp": line.split(" — ")[0].strip(),
                 "type":      event_type,
-                "message":   line.split(" — ")[1].strip() if " — " in line else line
+                "message": line.split(" — ")[1].strip() if " — " in line else line,
             })
 
     return events
