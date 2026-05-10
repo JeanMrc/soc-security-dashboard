@@ -13,6 +13,7 @@ pipeline.
 ## Features
 
 - Visualizes security events from File Integrity Checker
+- Auto refreshes every 30 seconds — always shows latest events
 - Bar chart showing event frequency by type
 - Timeline chart showing when events occurred
 - Color coded event table with last 20 alerts
@@ -85,6 +86,10 @@ LOG_FILE=/path/to/your/integrity.log python app.py
 Parsing unstructured log files into structured data for visualization.
 Each log line is parsed by event type, timestamp and message then
 fed into Plotly charts with color coded markers per event type.
+
+CSS class names cannot contain spaces so event types like NEW FILE
+are normalized to NEW-FILE using Jinja2's replace filter before
+being applied as HTML classes.
 
 ---
 
