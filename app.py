@@ -7,10 +7,17 @@ import plotly
 import plotly.graph_objects as go 
 
 
-# -- Config --
-BASE_DIR  = os.path.dirname(os.path.abspath(__file__))
-app       = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"))
-LOG_FILE  = os.path.join(BASE_DIR, "..", "Projects5", "integrity.log")
+# ─────────────────────────────────────────
+# Config
+# ─────────────────────────────────────────
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+app      = Flask(__name__, template_folder=os.path.join(BASE_DIR, "templates"))
+
+# Point this to your file-integrity-checker's integrity.log
+LOG_FILE = os.environ.get(
+    "LOG_FILE",
+    os.path.join(BASE_DIR, "..", "file-integrity-checker", "integrity.log")
+)
 
 #-- Parse Log -- 
 def parse_log():
