@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-     <meta http-equiv="refresh" content="30">
+    <meta http-equiv="refresh" content="30">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SOC Dashboard</title>
     <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
@@ -24,14 +24,13 @@
         .tag { padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; }
         .MODIFIED { background: #e67e22; }
         .DELETED  { background: #e74c3c; }
-        .NEW.FILE { background: #3498db; }
+        .NEW-FILE { background: #3498db; }
         .RENAMED  { background: #9b59b6; }
     </style>
 </head>
 <body>
     <h1>Security Operations Dashboard</h1>
     <p class="subtitle">File Integrity Monitor — Generated: {{ generated }}</p>
-
     <div class="cards">
         <div class="card"><h3>Total Events</h3><p>{{ total }}</p></div>
         <div class="card"><h3>Modified</h3><p>{{ modified }}</p></div>
@@ -39,12 +38,10 @@
         <div class="card"><h3>New Files</h3><p>{{ new_files }}</p></div>
         <div class="card"><h3>Renamed</h3><p>{{ renamed }}</p></div>
     </div>
-
     <div class="charts">
         <div class="chart-box" id="bar"></div>
         <div class="chart-box" id="timeline"></div>
     </div>
-
     <table>
         <tr>
             <th>Timestamp</th>
@@ -54,12 +51,11 @@
         {% for event in events %}
         <tr>
             <td>{{ event.timestamp }}</td>
-            <td><span class="tag {{ event.type }}">{{ event.type }}</span></td>
+            <td><span class="tag {{ event.type | replace(' ', '-') }}">{{ event.type }}</span></td>
             <td>{{ event.message }}</td>
         </tr>
         {% endfor %}
     </table>
-
     <script>
         Plotly.newPlot('bar',      {{ bar_chart | safe }});
         Plotly.newPlot('timeline', {{ timeline_chart | safe }});
